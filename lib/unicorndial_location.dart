@@ -34,6 +34,7 @@ abstract class UnicornDialLocation extends FloatingActionButtonLocation {
   /// 
   /// See [FloatingActionButtonLocation.endDocked] for more info.
   static const FloatingActionButtonLocation endDocked = _EndDockedUnicornDialLocation();
+  static const FloatingActionButtonLocation centerDocked = _CenterDockedUnicornDialLocation();
 }
 
 abstract class _DockedFloatingActionButtonLocation extends UnicornDialLocation {
@@ -74,4 +75,17 @@ class _EndDockedUnicornDialLocation extends _DockedFloatingActionButtonLocation 
 
   @override
   String toString() => 'UnicornDialLocation.endDocked';
+}
+
+class _CenterDockedUnicornDialLocation extends _DockedFloatingActionButtonLocation {
+  const _CenterDockedUnicornDialLocation();
+
+  @override
+  Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
+    final double fabX = (scaffoldGeometry.scaffoldSize.width - scaffoldGeometry.floatingActionButtonSize.width) / 2.0;
+    return Offset(fabX, getDockedY(scaffoldGeometry));
+  }
+
+  @override
+  String toString() => 'UnicornDialLocation.centerDocked';
 }
